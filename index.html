@@ -75,17 +75,16 @@
             <i class="fa-solid fa-arrow-rotate-right"></i>
         </div>
         <div id="audio-player-container">
+            <audio preload=”metadata” loop id="audio-player"
+                src="http://listen.vo.llnwd.net/g3/prvw/9/5/1/1/7/2489571159.mp3">
+            </audio>
             <span id="current-time" class="time">0:00</span>
             <input type="range" id="seek-slider" value="0" min="0" max="100">
             <span id="duration" class="time">0:00</span>
         </div>
-        <!-- <audio id="audio-player" controls src="http://listen.vo.llnwd.net/g3/prvw/9/5/1/1/7/2489571159.mp3">
-        </audio> -->
         <div class="sound-controls">
             <i class="fa-solid fa-volume-low"></i>
             <input type="range" id="volume-slider" value="0" min="0" max="100">
-            <!-- <i class="fa-solid fa-volume-high"></i>
-            <i class="fa-solid fa-volume-xmark"></i> -->
         </div>
     </div>
     <div class="songs-queue">

@@ -75,7 +75,7 @@ body {
     height: 100vh;
     background-color: gray;
     grid-template-columns: 300px auto;
-    grid-template-rows: 70px auto 80px;
+    grid-template-rows: 70px auto 100px;
     overflow-y: hidden;
     overflow-x: hidden;
 }
@@ -90,7 +90,7 @@ nav {
 .sidebar {
     background-color: antiquewhite;
     grid-row-start: 1;
-    grid-row-end: 4;
+    grid-row-end: 3;
     grid-column-start: 1;
     grid-column-end: 2;
 }
@@ -105,15 +105,15 @@ main {
     background-color: aliceblue;
     grid-row-start: 3;
     grid-row-end: 4;
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 3;
 }
 .songs-queue {
     position: absolute;
     background-color: bisque;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 170px);
     width: 600px;
-    bottom: 80px;
+    bottom: 100px;
     right: -600px;
     transition: 0.3s ease transform;
 }

@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,8 +18,10 @@
 
 <body>
     <nav>
-        Nav
-        <i class="fa-solid fa-chevron-left"></i>
+        <div class="browser-history-nav">
+            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
         <div class="nav-items">
             <form>
                 <input type="text" placeholder="What you wish ?">
@@ -33,7 +38,7 @@
         </div>
 
         <div class="sidebar-list-items">
-            <div data-link id="home">
+            <div data-link id="home" class="active">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
             </div>
@@ -47,15 +52,95 @@
             </div>
             <div data-link id="playlist">
                 <i class="fa-solid fa-music"></i>
-                <p>Playlist</p>
+                <p>My playlists</p>
             </div>
         </div>
         <div class="next-in-queue">
 
         </div>
     </div>
-    <main>
-        playlist display
+    <main class="custom-scroll">
+        <section id="topTracks">
+            <h1 class="section-title">Top Tracks</h1>
+            <div class="topTracks-list custom-scroll">
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+                    <i data-song-option-toggle class="fa-solid fa-ellipsis"></i>
+                    <div class="song-card-options">
+                        <p>Add to playlist</p>
+                        <p>Add to queue</p>
+                        <p>Play next</p>
+                    </div>
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="topArtists">
+            <h1 class="section-title">Top Artists</h1>
+            <div class="topArtists-list custom-scroll">
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+                <div data-demo-song-name="name" data-track-link="href" class="song-card" data-song-preview="previewURL">
+                    <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                        alt="">
+                    <div class="music-text custom-scroll">
+                        <p class="primary-text">Lane & Massane</p>
+                        <p class="primary-text">And we know it</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section id="topGenre">
+            <h1 class="section-title">Top in the genre</h1>
+            <div class="topGenre-list custom-scroll">
+                <div class="load"></div>
+            </div>
+
+        </section>
     </main>
     <div class="audio-player">
         <div class="music-info">
@@ -73,14 +158,29 @@
             <i class="fa-solid fa-arrow-rotate-right"></i>
         </div>
         <div id="audio-player-container">
-            <audio preload=”metadata” loop id="audio-player" controls
-                src="http://listen.vo.llnwd.net/g3/prvw/9/5/1/1/7/2489571159.mp3">
+            <audio id="audio-player" controls src="http://listen.vo.llnwd.net/g3/prvw/9/5/1/1/7/2489571159.mp3">
             </audio>
         </div>
     </div>
     <div class="songs-queue">
-        <div class="songs-queue-toggler">queue</div>
-        songs-queue
+        <div class="songs-queue-toggler">
+            <p>Queue</p>
+            <i class="fa-solid fa-chevron-up"></i>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+        <div class="container">
+            <h2>Currently playing</h2>
+            <div class="queue-current-playing">
+                <div class="play-pause"></div>
+                <div class="song-image"></div>
+                div
+            </div>
+            <h2>Up next</h2>
+            <div class="upNextOptions">
+                <i class="fa-solid fa-shuffle"></i>
+                <i class="fa-solid fa-trash"></i>
+            </div>
+        </div>
     </div>
 </body>
 

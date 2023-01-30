@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
     <script defer async src="./index.js"></script>
     <title>Document</title>
@@ -13,15 +16,77 @@
 <body>
     <nav>
         Nav
+        <i class="fa-solid fa-chevron-left"></i>
+        <div class="nav-items">
+            <form>
+                <input type="text" placeholder="What you wish ?">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </form>
+            <div class="profile">
+                <img src="" alt="">
+            </div>
+        </div>
     </nav>
     <div class="sidebar">
-        sidebar
+        <div id="logo">
+            <img src="./images/logo idea 3 sinfon.svg" alt="">
+        </div>
+
+        <div class="sidebar-list-items">
+            <div data-link id="home">
+                <i class="fa-solid fa-house"></i>
+                <p>Home</p>
+            </div>
+            <div data-link id="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <p>Search</p>
+            </div>
+            <div data-link id="recently-played">
+                <i class="fa-solid fa-compact-disc"></i>
+                <p>Recently played</p>
+            </div>
+            <div data-link id="playlist">
+                <i class="fa-solid fa-music"></i>
+                <p>Playlist</p>
+            </div>
+        </div>
+        <div class="next-in-queue">
+
+        </div>
     </div>
     <main>
         playlist display
     </main>
     <div class="audio-player">
-        music player
+        <div class="music-info">
+            <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
+                alt="">
+            <div class="music-text">
+                <p class="primary-text">Lane & Massane</p>
+                <p class="primary-text">And we know it</p>
+            </div>
+        </div>
+        <div class="audio-controls">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <i class="fa-solid fa-backward-step"></i>
+            <i id="play-icon" class="fa-regular fa-circle-play hide-icon"></i>
+            <i id="pause-icon" class="fa-regular fa-circle-pause"></i>
+            <i class="fa-solid fa-forward-step"></i>
+            <i class="fa-solid fa-arrow-rotate-right"></i>
+        </div>
+        <div id="audio-player-container">
+            <span id="current-time" class="time">0:00</span>
+            <input type="range" id="seek-slider" value="0" min="0" max="100">
+            <span id="duration" class="time">0:00</span>
+        </div>
+        <!-- <audio id="audio-player" controls src="http://listen.vo.llnwd.net/g3/prvw/9/5/1/1/7/2489571159.mp3">
+        </audio> -->
+        <div class="sound-controls">
+            <i class="fa-solid fa-volume-low"></i>
+            <input type="range" id="volume-slider" value="0" min="0" max="100">
+            <!-- <i class="fa-solid fa-volume-high"></i>
+            <i class="fa-solid fa-volume-xmark"></i> -->
+        </div>
     </div>
     <div class="songs-queue">
         <div class="songs-queue-toggler">queue</div>

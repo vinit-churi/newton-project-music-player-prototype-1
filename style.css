@@ -185,6 +185,74 @@ main {
     max-height: calc(100vh - 170px);
     overflow-y: auto;
 }
+
+#topArtists .topArtists-list {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    gap: 0px;
+    min-height: 200px;
+}
+.artist-container {
+    flex: 1 1 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 10px;
+    cursor: pointer;
+    position: relative;
+    /* background-color: gainsboro; */
+}
+.artist-container:nth-child(4)::before,
+.artist-container:nth-child(5)::before,
+.artist-container:nth-child(6)::before {
+    content: "";
+    /* height: 3px; */
+    border-radius: 1px;
+    border-top: 1px solid #dadce0;
+    /* background-color: #dadce0; */
+    position: absolute;
+    width: 90%;
+    top: 0px;
+    margin: 0px auto;
+    left: 0px;
+    right: 0px;
+}
+.artist-container:nth-child(4)::after,
+.artist-container:nth-child(5)::after,
+.artist-container:nth-child(6)::after {
+    content: "";
+    /* height: 1px; */
+    border-radius: 3px;
+    border-bottom: 1px solid #dadce0;
+    /* background-color: #dadce0; */
+    width: 90%;
+    bottom: 0px;
+    position: absolute;
+    margin: 0px auto;
+    left: 0px;
+    right: 0px;
+}
+.artist-container .artist-name {
+    pointer-events: none;
+}
+.artist-container i {
+    margin-left: auto;
+    transition: 0.3s ease rotate;
+    pointer-events: none;
+}
+.artist-container img {
+    height: 60px;
+    width: 60px;
+    border-radius: 5px;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+[data-artist-card-open="true"] .fa-angle-down {
+    rotate: 180deg;
+}
 .audio-player {
     background-color: aliceblue;
     grid-row-start: 3;
@@ -267,8 +335,9 @@ i {
 
 .songs-queue {
     position: absolute;
-    background-color: var(--white);
-    height: calc(100vh - 200px);
+    background-color: white;
+    border: 2px solid var(--white);
+    height: calc(100vh - 170px);
     /* bottom: 100px; */
     top: calc(100vh - 100px);
     /* bottom: 30px; */
@@ -388,7 +457,8 @@ i {
 }
 .topTracks-list,
 .topArtists-list,
-.topGenre-list {
+.topGenre-list,
+.topPlaylist-list {
     height: 210px;
     display: flex;
     align-items: center;
@@ -408,6 +478,7 @@ i {
     cursor: pointer;
     flex: 0 0 150px;
     position: relative;
+    overflow: hidden;
 }
 .song-card p {
     /* text-align: center; */
@@ -418,6 +489,7 @@ i {
     height: 150px;
     width: 100%;
     object-fit: cover;
+    user-select: none;
 }
 
 .song-card .fa-ellipsis {

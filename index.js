@@ -25,14 +25,26 @@ body.addEventListener("click", (event) => {
         );
     }
     if ((event.target.dataset.belongsTo = "artist-card")) {
-        console.log("look here");
-        console.log(event.target);
-        if (event.target.dataset.artistCardOpen === "true") {
-            event.target.dataset.artistCardOpen = false;
-            removeArtistDetails(event);
+        const errorDiv = document.querySelector(".artist-drop-down");
+        if (
+            (errorDiv && errorDiv.contains(event.target)) ||
+            event.target.classList.contains("artist-drop-down")
+        ) {
+            console.log("inside the artist-drop-down");
+            console.log(event.target);
         } else {
-            event.target.dataset.artistCardOpen = true;
-            insertArtistDetails(event);
+            console.log("look here");
+            console.log(event.target);
+            if (event.target.dataset.artistCardOpen === "true") {
+                event.target.dataset.artistCardOpen = false;
+                removeArtistDetails(event);
+                console.log("inside true");
+                console.log(event.target);
+            } else {
+                console.log("inside false");
+                event.target.dataset.artistCardOpen = true;
+                insertArtistDetails(event);
+            }
         }
     }
 });
@@ -68,6 +80,10 @@ async function insertArtistDetails(event) {
     const artistImg = document.createElement("img");
     artistImg.classList.add("artistImg");
     artistImg.setAttribute("src", img);
+    artistImg.addEventListener("error", function (e) {
+        this.src =
+            "https://media.istockphoto.com/id/1189316258/photo/he-has-some-amazing-musical-talents.jpg?b=1&s=170667a&w=0&k=20&c=mFttWNgvHzypo5OdfPS9weOzx0R4n8UXjjDIBTZUz4E=";
+    });
     const bioDiv = document.createElement("p");
     bioDiv.textContent = bio;
     artistTitle.textContent = name;
@@ -86,11 +102,12 @@ async function insertArtistDetails(event) {
     const albumDivContainer = document.createElement("div");
     albumDivContainer.classList.add("albumDivContainer");
     albumDivContainer.classList.add("custom-scroll");
+    artistBio.classList.add("custom-scroll");
     const tracksDivContainer = document.createElement("div");
     tracksDivContainer.classList.add("tracksDivContainer");
     tracksDivContainer.classList.add("custom-scroll");
     albumDivTitle.textContent = "Albums";
-    tracksDivTitle.textContent = "Albums";
+    tracksDivTitle.textContent = "Tracks";
     tracksDivContainer.append(loading);
     albumDivContainer.append(loadingClone);
     artistAlbums.append(albumDivTitle, albumDivContainer);
@@ -109,9 +126,21 @@ async function insertArtistDetails(event) {
         );
         // console.log(target);
         target.insertAdjacentElement("afterend", artistDropDown);
-    } else {
+    } else if (event.target.dataset.index <= 8) {
         const target = document.querySelector(
             '[data-index="8"].artist-container'
+        );
+        // console.log(target);
+        target.insertAdjacentElement("afterend", artistDropDown);
+    } else if (event.target.dataset.index <= 11) {
+        const target = document.querySelector(
+            '[data-index="11"].artist-container'
+        );
+        // console.log(target);
+        target.insertAdjacentElement("afterend", artistDropDown);
+    } else if (event.target.dataset.index <= 14) {
+        const target = document.querySelector(
+            '[data-index="14"].artist-container'
         );
         // console.log(target);
         target.insertAdjacentElement("afterend", artistDropDown);
@@ -144,13 +173,13 @@ async function insertArtistDetails(event) {
         loadingClone.remove();
         albums["albums"].forEach((album, index) => {
             console.log(album.name, album.id, album["links"]["tracks"]["href"]);
-            const element = `
+            const HTMLelement = `
                 <div data-index="${index}" data-album-id="${album.id}" data-tracks-link="${album["links"]["tracks"]["href"]}" class="albumCard">
                     <img src="https://api.napster.com/imageserver/v2/albums/${album.id}/images/500x500.jpg" />
                     <p class="album-name">${album.name}</p>
                 </div>
             `;
-            albumDivContainer.insertAdjacentHTML("beforeend", element);
+            albumDivContainer.insertAdjacentHTML("beforeend", HTMLelement);
         });
     } catch (error) {
         console.log(error);
@@ -218,7 +247,7 @@ fetch(
     .catch((error) => console.log("error", error));
 
 fetch(
-    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=9",
+    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=17",
     requestOptions
 )
     .then((response) => response.json())
@@ -250,7 +279,7 @@ fetch(
                     blurbs,
                 });
                 // console.log(name, id, img, albums, genre,bio);
-                if (requiredArtist.length === 9) break;
+                if (requiredArtist.length === 15) break;
             } catch (error) {
                 i++;
             }
@@ -264,11 +293,21 @@ fetch(
             const blurb = artist.blurbs.join(" ");
             // console.log(blurb);
             const element = `
-            <div data-artist-name="${artist.name}" data-artist-bio="${blurb}" data-genre="${artist.genre}?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz" data-album-link="${artist.albums}?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz" data-artist-id="${artist.id}" data-belongs-to="artist-card" data-index="${index}" data-artist-card-open="false" class="artist-container">
-            <img data-belongs-to="artist-card" class="artist-image"
-                    src="https://api.napster.com/imageserver/v2/artists/${artist.id}/images/230x153.jpg" alt="artist">
-            <div data-belongs-to="artist-card" class="artist-name">${artist.name}</div>
-                <i data-belongs-to="artist-card" class="fa-solid fa-angle-down"></i>
+            <div data-artist-name="${
+                artist.name
+            }" data-artist-bio="${blurb.replace(/['"]/g, "")}" data-genre="${
+                artist.genre
+            }?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz" data-album-link="${
+                artist.albums
+            }?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz" data-artist-id="${
+                artist.id
+            }" data-belongs-to="artist-card" data-index="${index}" data-artist-card-open="false" class="artist-container">
+            <img class="artist-image"
+                    src="https://api.napster.com/imageserver/v2/artists/${
+                        artist.id
+                    }/images/230x153.jpg" onerror="this.src='https://media.istockphoto.com/id/1189316258/photo/he-has-some-amazing-musical-talents.jpg?b=1&s=170667a&w=0&k=20&c=mFttWNgvHzypo5OdfPS9weOzx0R4n8UXjjDIBTZUz4E='" alt="artist">
+            <div class="artist-name">${artist.name}</div>
+                <i class="fa-solid fa-angle-down"></i>
             </div>
             `;
 

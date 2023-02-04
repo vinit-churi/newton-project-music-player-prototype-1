@@ -206,7 +206,10 @@ main {
 }
 .artist-container:nth-child(4)::before,
 .artist-container:nth-child(5)::before,
-.artist-container:nth-child(6)::before {
+.artist-container:nth-child(6)::before,
+.artist-container:nth-child(10)::before,
+.artist-container:nth-child(11)::before,
+.artist-container:nth-child(12)::before {
     content: "";
     /* height: 3px; */
     border-radius: 1px;
@@ -221,7 +224,10 @@ main {
 }
 .artist-container:nth-child(4)::after,
 .artist-container:nth-child(5)::after,
-.artist-container:nth-child(6)::after {
+.artist-container:nth-child(6)::after,
+.artist-container:nth-child(10)::after,
+.artist-container:nth-child(11)::after,
+.artist-container:nth-child(12)::after {
     content: "";
     /* height: 1px; */
     border-radius: 3px;
@@ -249,6 +255,12 @@ main {
     object-fit: cover;
     pointer-events: none;
 }
+.album-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+    pointer-events: none;
+}
 
 [data-artist-card-open="true"] .fa-angle-down {
     rotate: 180deg;
@@ -268,6 +280,8 @@ main {
     flex: 0 0 30%;
     padding: 0px 10px;
     min-height: 100%;
+    max-height: 340px;
+    overflow-y: auto;
 }
 .artistBio .artistImg {
     display: inline;
@@ -329,11 +343,13 @@ main {
 .albumCard {
     width: 160px;
     height: 170px;
+    cursor: pointer;
 }
 .albumCard img {
     width: 160px;
     height: 150px;
     object-fit: cover;
+    pointer-events: none;
 }
 .audio-player {
     background-color: aliceblue;

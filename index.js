@@ -19,32 +19,40 @@ body.addEventListener("click", (event) => {
             .classList.toggle("open-options");
     }
     if (event.target.classList.contains("song-card-option")) {
-        console.log(
-            event.target.parentNode.parentNode,
-            event.target.dataset.value
-        );
+        console.log(event.target);
     }
-    if ((event.target.dataset.belongsTo = "artist-card")) {
-        const errorDiv = document.querySelector(".artist-drop-down");
-        if (
-            (errorDiv && errorDiv.contains(event.target)) ||
-            event.target.classList.contains("artist-drop-down")
-        ) {
-            console.log("inside the artist-drop-down");
-            console.log(event.target);
+    if (event.target.classList.contains("albumCard")) {
+        console.log(event.target);
+        const url =
+            event.target.dataset.tracksLink +
+            "?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz";
+        const container = document.querySelector(".tracksDivContainer");
+        while (container.firstChild) {
+            container.firstChild.remove();
+        }
+        container.innerHTML = "<div class='load'></div>";
+        fetch(url)
+            .then((response) => response.json())
+            .then((response) => {
+                // console.log(response);
+                return response["tracks"];
+            })
+            .then((tracks) => {
+                // console.log(tracks);
+                insertTracksIntoContainer(tracks);
+            });
+    }
+    if (event.target.classList.contains("artist-container")) {
+        // console.log("is this executing");
+        if (event.target.dataset.artistCardOpen === "true") {
+            event.target.dataset.artistCardOpen = false;
+            removeArtistDetails(event);
+            // console.log("inside true");
+            // console.log(event.target);
         } else {
-            console.log("look here");
-            console.log(event.target);
-            if (event.target.dataset.artistCardOpen === "true") {
-                event.target.dataset.artistCardOpen = false;
-                removeArtistDetails(event);
-                console.log("inside true");
-                console.log(event.target);
-            } else {
-                console.log("inside false");
-                event.target.dataset.artistCardOpen = true;
-                insertArtistDetails(event);
-            }
+            // console.log("inside false");
+            event.target.dataset.artistCardOpen = true;
+            insertArtistDetails(event);
         }
     }
 });
@@ -67,7 +75,7 @@ async function insertArtistDetails(event) {
 
     // TODO: get artist name
     const name = event.target.dataset.artistName;
-    console.log(name);
+    // console.log(name);
     // TODO: get artist bio
     const bio =
         event.target.dataset.artistBio ||
@@ -169,10 +177,10 @@ async function insertArtistDetails(event) {
             .map((genre) => genre.name)
             .join(", ");
         // TODO: get artist albums
-        console.log(albums);
+        // console.log(albums);
         loadingClone.remove();
         albums["albums"].forEach((album, index) => {
-            console.log(album.name, album.id, album["links"]["tracks"]["href"]);
+            // console.log(album.name, album.id, album["links"]["tracks"]["href"]);
             const HTMLelement = `
                 <div data-index="${index}" data-album-id="${album.id}" data-tracks-link="${album["links"]["tracks"]["href"]}" class="albumCard">
                     <img src="https://api.napster.com/imageserver/v2/albums/${album.id}/images/500x500.jpg" />
@@ -181,13 +189,68 @@ async function insertArtistDetails(event) {
             `;
             albumDivContainer.insertAdjacentHTML("beforeend", HTMLelement);
         });
+        const firstAlbum = albums["albums"][0]["links"]["tracks"]["href"];
+        /* fetch(firstAlbum)
+            .then(response => response.json())
+            .then(response => {
+                return response['tracks'].map(track) => {
+                    return {
+                        "trackId" : track.id,
+                        "trackUrl" : track.previewURL,
+                        "trackName" : track.name
+                    }
+                }
+            }).then(tracks => {
+                console.log(tracks)
+            }) */
+        fetch(
+            firstAlbum +
+                "?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz"
+        )
+            .then((response) => response.json())
+            .then((response) => {
+                // console.log(response);
+                return response["tracks"];
+            })
+            .then((tracks) => {
+                // console.log(tracks);
+                insertTracksIntoContainer(tracks);
+            });
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         return;
     }
 }
+
+function insertTracksIntoContainer(tracks) {
+    const container = document.querySelector(".tracksDivContainer");
+    while (container.firstChild) {
+        container.firstChild.remove();
+    }
+    tracks.forEach((track) => {
+        console.log(track);
+        const trackHTML = `
+                        <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
+                            <img src="http://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
+                                alt="">
+                            <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
+                            <div data-track-id="${track.id}" class="song-card-options">
+                                <p data-value="addToPlaylist" data-track-id="${track.id}" class="song-card-option">Add to playlist</p>
+                                <p data-value="addToQueue" data-track-id="${track.id}" class="song-card-option">Add to queue</p>
+                                <p data-value="playNow" data-track-id="${track.id}" class="song-card-option">Play now</p>
+                            </div>
+                            <div class="music-text custom-scroll">
+                                <p class="primary-text">${track.name}</p>
+                                <p class="primary-text">${track.albumName}</p>
+                            </div>
+                        </div>
+                        `;
+
+        container.insertAdjacentHTML("beforeend", trackHTML);
+    });
+}
 async function removeArtistDetails() {
-    console.log("remoe the artist details");
+    // console.log("remoe the artist details");
     const existingDropDown = document.querySelector(".artist-drop-down");
     if (existingDropDown) {
         existingDropDown.remove();
@@ -218,13 +281,13 @@ fetch(
     .then((response) => response.json())
     .then((result) => {
         topTracks = result.tracks;
-        console.log(topTracks);
+        // console.log(topTracks);
         const topTrackList = document.querySelector(".topTracks-list");
         if (topTrackList.querySelector(".load")) {
             topTrackList.querySelector(".load").remove();
         }
         topTracks.forEach((track) => {
-            console.log(track);
+            // console.log(track);
             const trackHTML = `
             <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
                 <img src="http://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
@@ -253,7 +316,7 @@ fetch(
     .then((response) => response.json())
     .then((result) => {
         topArtists = result.artists;
-        console.log(topArtists);
+        // console.log(topArtists);
         let i = 0;
         const requiredArtist = [];
         while (i < topArtists.length) {
@@ -301,7 +364,7 @@ fetch(
                 artist.albums
             }?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz" data-artist-id="${
                 artist.id
-            }" data-belongs-to="artist-card" data-index="${index}" data-artist-card-open="false" class="artist-container">
+            }" data-index="${index}" data-artist-card-open="false" class="artist-container">
             <img class="artist-image"
                     src="https://api.napster.com/imageserver/v2/artists/${
                         artist.id

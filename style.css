@@ -440,7 +440,7 @@ i {
     top: calc(100vh - 100px);
     /* bottom: 30px; */
     right: 0px;
-    left: 300px;
+    left: 235px;
     transition: 0.3s ease transform;
     /* transform: translateY(100%); */
     /* z-index: -1; */

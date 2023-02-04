@@ -374,9 +374,65 @@ fetch(
     .then((response) => response.json())
     .then((response) => response.playlists)
     .then((playlists) => {
+        const playlistList = document.querySelector(".topPlaylist-list");
+        while (playlistList.firstChild) {
+            playlistList.firstChild.remove();
+        }
         playlists.forEach((playlist) => {
             console.log(playlist);
-            const img = `https://api.napster.com/imageserver/v2/playlists/${playlist.id}/artists/images/230x153.jpg?order=frequency&montage=2x2`;
+
+            const HTMLelement = `
+            <div class="playlist-item">
+                <img src="https://api.napster.com/imageserver/v2/playlists/${playlist.id}/artists/images/1200x400.jpg?order=frequency&montage=2x2"
+                    alt="">
+                <h1 class="playlist-name">${playlist.name}</h1>
+                <div data-tracks-url="${playlist["links"]["tracks"]["href"]}" data-playlist-id="${playlist.id}" class="playlist-tracks custom-scroll">
+                    <div class="load"></div>
+
+                </div>
+            </div>
+            `;
+            playlistList.insertAdjacentHTML("beforeend", HTMLelement);
+
+            const playlistItem = playlistList.querySelector(
+                `[data-playlist-id="${playlist.id}"]`
+            );
+            fetch(
+                playlistItem.dataset.tracksUrl +
+                    "?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz&limit=8"
+            )
+                .then((response) => response.json())
+                .then((response) => response.tracks)
+                .then((tracks) => {
+                    const container = document.querySelector(
+                        `[data-playlist-id="${playlist.id}"]`
+                    );
+                    attachSlider(container);
+
+                    if (container.querySelector(".load")) {
+                        container.querySelector(".load").remove();
+                    }
+                    tracks.forEach((track) => {
+                        // console.log(track);
+                        const trackHTML = `
+            <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
+                <img src="http://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
+                    alt="">
+                <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
+                <div data-track-id="${track.id}" class="song-card-options">
+                    <p data-value="addToPlaylist" data-track-id="${track.id}" class="song-card-option">Add to playlist</p>
+                    <p data-value="addToQueue" data-track-id="${track.id}" class="song-card-option">Add to queue</p>
+                    <p data-value="playNow" data-track-id="${track.id}" class="song-card-option">Play now</p>
+                </div>
+                <div class="music-text custom-scroll">
+                    <p class="primary-text">${track.name}</p>
+                    <p class="primary-text">${track.albumName}</p>
+                </div>
+            </div>
+            `;
+                        container.insertAdjacentHTML("beforeEnd", trackHTML);
+                    });
+                });
         });
     });
 

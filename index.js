@@ -190,19 +190,6 @@ async function insertArtistDetails(event) {
             albumDivContainer.insertAdjacentHTML("beforeend", HTMLelement);
         });
         const firstAlbum = albums["albums"][0]["links"]["tracks"]["href"];
-        /* fetch(firstAlbum)
-            .then(response => response.json())
-            .then(response => {
-                return response['tracks'].map(track) => {
-                    return {
-                        "trackId" : track.id,
-                        "trackUrl" : track.previewURL,
-                        "trackName" : track.name
-                    }
-                }
-            }).then(tracks => {
-                console.log(tracks)
-            }) */
         fetch(
             firstAlbum +
                 "?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz"
@@ -380,3 +367,15 @@ fetch(
     .catch((error) => console.log(error));
 
 // http://direct.rhapsody.com/imageserver/v2/albums/{{albumId}}/images/300x300.jpg
+
+fetch(
+    "http://api.napster.com/v2.2/playlists/featured?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=3"
+)
+    .then((response) => response.json())
+    .then((response) => response.playlists)
+    .then((playlists) => {
+        playlists.forEach((playlist) => {
+            console.log(playlist);
+            const img = `https://api.napster.com/imageserver/v2/playlists/${playlist.id}/artists/images/230x153.jpg?order=frequency&montage=2x2`;
+        });
+    });

@@ -84,7 +84,7 @@ body {
     width: 100vw;
     height: 100vh;
     /* background-color: gray; */
-    grid-template-columns: 300px auto;
+    grid-template-columns: 220px auto;
     grid-template-rows: 70px auto 100px;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -252,6 +252,88 @@ main {
 
 [data-artist-card-open="true"] .fa-angle-down {
     rotate: 180deg;
+}
+
+.artist-drop-down {
+    min-height: 350px;
+    /* background-color: #7b818a; */
+    border-bottom: 1px solid #dadce0;
+    border-top: 1px solid #dadce0;
+    display: flex;
+    width: 100%;
+}
+
+.artistBio {
+    /* background-color: #cacaca; */
+    flex: 0 0 30%;
+    padding: 0px 10px;
+    min-height: 100%;
+}
+.artistBio .artistImg {
+    display: inline;
+    float: right;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.artistAlbums {
+    /* background-color: #cacaca; */
+    flex: 1 1 35%;
+    padding: 0px 10px;
+    min-height: 100%;
+    position: relative;
+}
+.artistTracks {
+    /* background-color: #cacaca; */
+    flex: 1 1 35%;
+    padding: 0px 10px;
+    min-height: 100%;
+    position: relative;
+}
+.artistAlbums .load,
+.artistTracks .load {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto auto;
+}
+
+.artistAlbums h1,
+.artistTracks h1 {
+    padding-left: 20px;
+    margin-top: 5px;
+}
+.artistBio h1 {
+    margin-top: 5px;
+}
+.albumDivContainer,
+.tracksDivContainer {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    padding: 0px 20px;
+    gap: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.albumDivContainer {
+    border-right: 1px solid #dadce0;
+    border-left: 1px solid #dadce0;
+}
+
+.albumCard {
+    width: 160px;
+    height: 170px;
+}
+.albumCard img {
+    width: 160px;
+    height: 150px;
+    object-fit: cover;
 }
 .audio-player {
     background-color: aliceblue;

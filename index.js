@@ -25,6 +25,8 @@ body.addEventListener("click", (event) => {
         );
     }
     if ((event.target.dataset.belongsTo = "artist-card")) {
+        console.log("look here");
+        console.log(event.target);
         if (event.target.dataset.artistCardOpen === "true") {
             event.target.dataset.artistCardOpen = false;
             removeArtistDetails(event);
@@ -36,14 +38,89 @@ body.addEventListener("click", (event) => {
 });
 
 async function insertArtistDetails(event) {
-    const genreLink = event.target.dataset.genre;
-    const albumLink = event.target.dataset.albumLink;
-    // const promises = [fetch(genreLink), fetch(albumLink)];
+    const artistDropDown = document.createElement("div");
+    artistDropDown.classList.add("artist-drop-down");
+    const existingDropDown = document.querySelector(".artist-drop-down");
+    if (existingDropDown) {
+        existingDropDown.remove();
+    }
+    const openArtistCards = document.querySelectorAll(
+        '[data-artist-card-open="true"]'
+    );
+    [...openArtistCards].forEach(function (card) {
+        if (event.target !== card) {
+            card.dataset.artistCardOpen = "false";
+        }
+    });
+
+    // TODO: get artist name
+    const name = event.target.dataset.artistName;
+    console.log(name);
     // TODO: get artist bio
     const bio =
         event.target.dataset.artistBio ||
         "Her discography spans multiple genres, and her songwriting—often inspired by her personal life—has received critical praise and wide media coverage. Born in West Reading, Pennsylvania, Swift moved to Nashville at age 14 to become a country artist.";
-    console.log(bio);
+    const img = `https://api.napster.com/imageserver/v2/artists/${event.target.dataset.artistId}/images/230x153.jpg`;
+
+    const artistBio = document.createElement("div");
+    artistBio.classList.add("artistBio");
+    const artistTitle = document.createElement("h1");
+    const artistImg = document.createElement("img");
+    artistImg.classList.add("artistImg");
+    artistImg.setAttribute("src", img);
+    const bioDiv = document.createElement("p");
+    bioDiv.textContent = bio;
+    artistTitle.textContent = name;
+    const genreDiv = document.createElement("div");
+    genreDiv.classList.add("artist-genre");
+    artistBio.append(artistTitle, artistImg, bioDiv, genreDiv);
+    const artistTracks = document.createElement("div");
+    artistTracks.classList.add("artistTracks");
+    const artistAlbums = document.createElement("div");
+    artistAlbums.classList.add("artistAlbums");
+    const loading = document.createElement("div");
+    loading.classList.add("load");
+    const loadingClone = loading.cloneNode();
+    const albumDivTitle = document.createElement("h1");
+    const tracksDivTitle = document.createElement("h1");
+    const albumDivContainer = document.createElement("div");
+    albumDivContainer.classList.add("albumDivContainer");
+    albumDivContainer.classList.add("custom-scroll");
+    const tracksDivContainer = document.createElement("div");
+    tracksDivContainer.classList.add("tracksDivContainer");
+    tracksDivContainer.classList.add("custom-scroll");
+    albumDivTitle.textContent = "Albums";
+    tracksDivTitle.textContent = "Albums";
+    tracksDivContainer.append(loading);
+    albumDivContainer.append(loadingClone);
+    artistAlbums.append(albumDivTitle, albumDivContainer);
+    artistTracks.append(tracksDivTitle, tracksDivContainer);
+    artistDropDown.append(artistBio, artistAlbums, artistTracks);
+
+    if (event.target.dataset.index <= 2) {
+        const target = document.querySelector(
+            '[data-index="2"].artist-container'
+        );
+        // console.log(target);
+        target.insertAdjacentElement("afterend", artistDropDown);
+    } else if (event.target.dataset.index <= 5) {
+        const target = document.querySelector(
+            '[data-index="5"].artist-container'
+        );
+        // console.log(target);
+        target.insertAdjacentElement("afterend", artistDropDown);
+    } else {
+        const target = document.querySelector(
+            '[data-index="8"].artist-container'
+        );
+        // console.log(target);
+        target.insertAdjacentElement("afterend", artistDropDown);
+    }
+    const genreLink = event.target.dataset.genre;
+    const albumLink = event.target.dataset.albumLink;
+    // const promises = [fetch(genreLink), fetch(albumLink)];
+
+    // console.log(bio);
     try {
         const [genres, albums] = await Promise.allSettled([
             fetch(genreLink),
@@ -56,7 +133,7 @@ async function insertArtistDetails(event) {
             .then((results) => {
                 return results.map((result) => result.value);
             });
-        console.log(genres);
+        // console.log(genres);
 
         // TODO: get artist genre :done
         const artistGenre = genres["genres"]
@@ -64,34 +141,28 @@ async function insertArtistDetails(event) {
             .join(", ");
         // TODO: get artist albums
         console.log(albums);
-        albums["albums"].forEach((album) => {
+        loadingClone.remove();
+        albums["albums"].forEach((album, index) => {
             console.log(album.name, album.id, album["links"]["tracks"]["href"]);
-            let img = `https://api.napster.com/imageserver/v2/albums/${album.id}/images/500x500.jpg`;
+            const element = `
+                <div data-index="${index}" data-album-id="${album.id}" data-tracks-link="${album["links"]["tracks"]["href"]}" class="albumCard">
+                    <img src="https://api.napster.com/imageserver/v2/albums/${album.id}/images/500x500.jpg" />
+                    <p class="album-name">${album.name}</p>
+                </div>
+            `;
+            albumDivContainer.insertAdjacentHTML("beforeend", element);
         });
     } catch (error) {
         console.log(error);
         return;
     }
-
-    if (event.target.dataset.index <= 2) {
-        const target = document.querySelector(
-            '[data-index="2"].artist-container'
-        );
-        // console.log(target);
-    } else if (event.target.dataset.index <= 5) {
-        const target = document.querySelector(
-            '[data-index="5"].artist-container'
-        );
-        // console.log(target);
-    } else {
-        const target = document.querySelector(
-            '[data-index="8"].artist-container'
-        );
-        // console.log(target);
-    }
 }
 async function removeArtistDetails() {
     console.log("remoe the artist details");
+    const existingDropDown = document.querySelector(".artist-drop-down");
+    if (existingDropDown) {
+        existingDropDown.remove();
+    }
 }
 
 /************
@@ -147,7 +218,7 @@ fetch(
     .catch((error) => console.log("error", error));
 
 fetch(
-    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=26",
+    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=9",
     requestOptions
 )
     .then((response) => response.json())
@@ -163,9 +234,6 @@ fetch(
                     name,
                     id,
                     blurbs,
-                    bios: {
-                        0: { bio },
-                    },
                     links: {
                         albums: { href: albums },
                         genres: { href: genre },
@@ -179,7 +247,6 @@ fetch(
                     img,
                     albums,
                     genre,
-                    bio,
                     blurbs,
                 });
                 // console.log(name, id, img, albums, genre,bio);

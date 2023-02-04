@@ -553,9 +553,6 @@ i {
 #topGenre {
     height: max-content;
 }
-.topTracks-list {
-    padding: 20px 0px;
-}
 .topTracks-list,
 .topArtists-list,
 .topGenre-list,
@@ -568,6 +565,12 @@ i {
     display: flex;
     flex-wrap: nowrap;
     gap: 10px;
+}
+.topTracks-list {
+    padding: 20px 0px;
+}
+.topTracks-list.custom-scroll::-webkit-scrollbar {
+    height: 11px;
 }
 
 .song-card {

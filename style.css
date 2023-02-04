@@ -459,22 +459,17 @@ i {
     padding: 20px;
 }
 .songs-queue-toggler {
-    /* position: absolute; */
-    /* background-color: white;
-    display: block;
-    z-index: 10;
-    padding: 5px 10px;
-    left: 0;
-    right: 0;
-    cursor: pointer;
-    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid #dadce0;
+    font-size: 20px;
+    font-weight: 700;
     display: flex;
-    gap: 5px;
-    top: -40px;
-    width: max-content;
-    margin: 0 auto;
-    border: 2px solid var(--white);
-    border-bottom: none; */
+    justify-content: space-between;
+}
+.songs-queue-toggler .options {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
 }
 .songs-queue-toggler i {
     position: relative;

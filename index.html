@@ -23,13 +23,20 @@
             <i class="fa-solid fa-chevron-right"></i>
         </div>
         <div class="nav-items">
-            <form>
+            <form class="" data-value="all">
+                <div class="custom-drop-down">
+                    <div class="option-display">All<i class="fa-solid fa-chevron-down"></i></div>
+                    <div data-value="All" class="option">All</div>
+                    <div data-value="Artist" class="option">Artist</div>
+                    <div data-value="Genre" class="option">Genre</div>
+                    <div data-value="Playlist" class="option">Playlist</div>
+                </div>
                 <input type="text" placeholder="What's you wish ?">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </form>
-            <div class="profile">
+            <!-- <div class="profile">
                 <img src="" alt="">
-            </div>
+            </div> -->
         </div>
     </nav>
     <div class="sidebar">
@@ -38,11 +45,11 @@
         </div>
 
         <div class="sidebar-list-items">
-            <div data-link id="home" class="active">
+            <div data-link="home-page" id="home" class="active">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
             </div>
-            <div data-link id="search">
+            <div data-link="search-page" id="search">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <p>Search</p>
             </div>
@@ -50,7 +57,7 @@
                 <i class="fa-solid fa-compact-disc"></i>
                 <p>Recently played</p>
             </div> -->
-            <div data-link id="playlist">
+            <div data-link="playlist-page" id="playlist">
                 <i class="fa-solid fa-music"></i>
                 <p>My playlists</p>
             </div>
@@ -60,7 +67,7 @@
         </div>
     </div>
     <main class="custom-scroll">
-        <div id="home-page">
+        <div class="div-page" id="home-page">
             <section id="topTracks">
                 <h1 class="section-title">Top Tracks</h1>
                 <div class="topTracks-list custom-scroll">
@@ -85,10 +92,10 @@
 
             </section>
         </div>
-        <div class="hide-page" id="search-page">
+        <div class="hide-page div-page" id="search-page">
 
         </div>
-        <div class="hide-page" id="playlist-page">
+        <div class="hide-page div-page" id="playlist-page">
 
         </div>
     </main>

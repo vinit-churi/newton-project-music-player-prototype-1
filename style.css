@@ -115,7 +115,55 @@ nav form {
     background-color: var(--white);
     width: max-content;
     padding: 5px 10px;
+    position: relative;
 }
+nav form .custom-drop-down {
+    position: absolute;
+    display: flex;
+    /* background-color: red; */
+    flex-direction: column;
+    width: 115px;
+    font-size: 20px;
+    top: 0px;
+    left: -115px;
+    z-index: 30;
+}
+nav form .custom-drop-down .option,
+nav form .custom-drop-down .option-display {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+    /* font-size: 16px; */
+}
+nav form .custom-drop-down .option-display {
+    justify-content: space-between;
+    border: 2px solid #c5c6c669;
+}
+.option-display i {
+    padding-right: 10px;
+    padding-left: 10px;
+    pointer-events: none;
+    transition: 0.3s ease transform;
+    transform-origin: center;
+}
+nav form .custom-drop-down .option {
+    background-color: #eef2f7;
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+    transition: 0.4s ease opacity;
+    transition: 0.3s ease-in-out height;
+}
+nav form.open-drop-down .custom-drop-down .option {
+    opacity: 1;
+    height: 45px;
+}
+nav form.open-drop-down .option-display i {
+    transform: rotate(180deg);
+}
+
 nav input[type="text"] {
     background-color: var(--white);
     border: none;
@@ -158,6 +206,10 @@ nav input[type="text"]::selection {
     font-size: 18px;
     cursor: pointer;
 }
+.sidebar-list-items [data-link] i,
+.sidebar-list-items [data-link] p {
+    pointer-events: none;
+}
 .sidebar-list-items [data-link].active {
     /* background-color: #dedee6; */
     background-color: var(--white);
@@ -187,6 +239,9 @@ main {
     max-height: calc(100vh - 170px);
     overflow-y: auto;
     padding-right: 90px;
+}
+.div-page {
+    min-height: 100%;
 }
 
 #topArtists .topArtists-list {
@@ -337,6 +392,7 @@ main {
     gap: 20px;
     max-height: 300px;
     overflow-y: auto;
+    max-width: 460px;
 }
 .albumDivContainer,
 .tracksDivContainer {
@@ -441,7 +497,7 @@ i {
     height: 350px;
     /* bottom: 100px; */
     /* top: calc(100vh - 100px); */
-    bottom: 230px;
+    /* bottom: 230px; */
     right: 10px;
     /* left: 235px; */
     width: 80px;
@@ -449,8 +505,9 @@ i {
     transition: 0.3s ease width;
     white-space: nowrap;
     overflow: hidden;
-    /* transform: translateY(100%); */
-    /* z-index: -1; */
+    top: 0px;
+    bottom: 0px;
+    margin: auto 0px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .songs-queue:hover {

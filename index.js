@@ -49,7 +49,44 @@ body.addEventListener("click", (event) => {
             insertArtistDetails(event);
         }
     }
+
+    if (event.target.dataset.link) {
+        const elementLink = event.target.dataset.link;
+        switchPage(elementLink);
+    }
+    if (event.target.classList.contains("option-display")) {
+        const form = document.querySelector("form");
+        form.classList.toggle("open-drop-down");
+    }
+    if (event.target.classList.contains("option")) {
+        const selectedOption = event.target.dataset.value;
+        const dropdown = event.target.parentNode;
+        dropdown.querySelector(
+            ".option-display"
+        ).innerHTML = `${selectedOption}<i class="fa-solid fa-chevron-down"></i>`;
+        const form = document.querySelector("form");
+        form.dataset.value = selectedOption;
+        form.classList.remove("open-drop-down");
+    }
 });
+
+function switchPage(elementLink) {
+    const links = document.querySelectorAll("[data-link]");
+    const pages = document.querySelectorAll(".div-page");
+    console.log(...links);
+    console.log(...pages);
+    [...links].forEach((link) => {
+        link.classList.remove("active");
+    });
+    const clickedLink = document.querySelector(`[data-link="${elementLink}"]`);
+    clickedLink.classList.add("active");
+    [...pages].forEach((page) => {
+        if (!page.classList.contains("hide-page"))
+            page.classList.add("hide-page");
+    });
+    const requiredPage = document.querySelector(`#${elementLink}`);
+    requiredPage.classList.remove("hide-page");
+}
 
 async function insertArtistDetails(event) {
     const artistDropDown = document.createElement("div");
@@ -212,7 +249,7 @@ function insertTracksIntoContainer(tracks) {
         console.log(track);
         const trackHTML = `
                         <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
-                            <img src="http://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
+                            <img src="https://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
                                 alt="">
                             <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
                             <div data-track-id="${track.id}" class="song-card-options">
@@ -270,7 +307,7 @@ fetch(
             // console.log(track);
             const trackHTML = `
             <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
-                <img src="http://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
+                <img src="https://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
                     alt="">
                 <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
                 <div data-track-id="${track.id}" class="song-card-options">
@@ -362,7 +399,7 @@ fetch(
 // http://direct.rhapsody.com/imageserver/v2/albums/{{albumId}}/images/300x300.jpg
 
 fetch(
-    "http://api.napster.com/v2.2/playlists/featured?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=3"
+    "https://api.napster.com/v2.2/playlists/featured?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=3"
 )
     .then((response) => response.json())
     .then((response) => response.playlists)
@@ -409,7 +446,7 @@ fetch(
                         // console.log(track);
                         const trackHTML = `
             <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
-                <img src="http://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
+                <img src="https://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
                     alt="">
                 <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
                 <div data-track-id="${track.id}" class="song-card-options">
@@ -460,3 +497,13 @@ function attachSlider(element) {
         console.log(walk);
     });
 }
+
+document.querySelector("form").onsubmit = (e) => {
+    e.preventDefault();
+    const searchQuery = e.target
+        .querySelector('input[type="text"]')
+        .value.trim();
+    // searchSong(e.target.dataset.value,searchQuery)
+    switchPage("search-page");
+    e.target.querySelector('input[type="text"]').value = "";
+};

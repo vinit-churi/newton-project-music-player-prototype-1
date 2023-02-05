@@ -472,24 +472,10 @@ i {
     display: flex;
     gap: 10px;
 }
-.songs-queue-toggler i {
-    position: relative;
-    top: 5px;
-}
-.songs-queue.open {
-    transform: translateY(-100%);
-}
-.songs-queue .fa-chevron-down {
-    display: none;
-}
-.songs-queue.open .fa-chevron-down {
-    display: block;
-}
-.songs-queue .fa-chevron-up {
-    display: block;
-}
-.songs-queue.open .fa-chevron-up {
-    display: none;
+
+.songs-queue-toggler p {
+    display: flex;
+    align-items: center;
 }
 
 @keyframes rotate {

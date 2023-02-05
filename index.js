@@ -6,12 +6,6 @@
 const body = document.querySelector("body");
 const songsQueue = document.querySelector(".songs-queue");
 body.addEventListener("click", (event) => {
-    if (
-        event.target.classList.contains("songs-queue-toggler") ||
-        document.querySelector(".songs-queue-toggler").contains(event.target)
-    ) {
-        songsQueue.classList.toggle("open");
-    }
     if (event.target.dataset.songOptionToggle !== undefined) {
         const trackId = event.target.dataset.songOptionToggle;
         document

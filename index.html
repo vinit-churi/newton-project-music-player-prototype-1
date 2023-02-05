@@ -34,7 +34,7 @@
     </nav>
     <div class="sidebar">
         <div id="logo">
-            <img src="./images/logo idea 3 sinfon.svg" alt="">
+            <img src="./images/logo idea 4 chordy.svg" alt="">
         </div>
 
         <div class="sidebar-list-items">
@@ -46,10 +46,10 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <p>Search</p>
             </div>
-            <div data-link id="recently-played">
+            <!-- <div data-link id="recently-played">
                 <i class="fa-solid fa-compact-disc"></i>
                 <p>Recently played</p>
-            </div>
+            </div> -->
             <div data-link id="playlist">
                 <i class="fa-solid fa-music"></i>
                 <p>My playlists</p>
@@ -60,37 +60,44 @@
         </div>
     </div>
     <main class="custom-scroll">
-        <section id="topTracks">
-            <h1 class="section-title">Top Tracks</h1>
-            <div class="topTracks-list custom-scroll">
-                <div class="load"></div>
+        <div id="home-page">
+            <section id="topTracks">
+                <h1 class="section-title">Top Tracks</h1>
+                <div class="topTracks-list custom-scroll">
+                    <div class="load"></div>
 
-            </div>
-        </section>
-        <section id="topArtists">
-            <h1 class="section-title">Top Artists</h1>
-            <div class="topArtists-list custom-scroll">
-                <div class="load"></div>
+                </div>
+            </section>
+            <section id="topArtists">
+                <h1 class="section-title">Top Artists</h1>
+                <div class="topArtists-list custom-scroll">
+                    <div class="load"></div>
 
-            </div>
+                </div>
 
-        </section>
-        <section id="topPlaylist">
-            <h1 class="section-title">Top playlist</h1>
-            <div class="topPlaylist-list custom-scroll">
-                <div class="load"></div>
+            </section>
+            <section id="topPlaylist">
+                <h1 class="section-title">Top playlist</h1>
+                <div class="topPlaylist-list custom-scroll">
+                    <div class="load"></div>
 
-            </div>
+                </div>
 
-        </section>
+            </section>
+        </div>
+        <div class="hide-page" id="search-page">
+
+        </div>
+        <div class="hide-page" id="playlist-page">
+
+        </div>
     </main>
     <div class="audio-player">
         <div class="music-info">
-            <img src="https://img.freepik.com/premium-vector/vintage-styled-retro-live-rock-music-party-event-poster_148087-69.jpg?w=2000"
-                alt="">
+            <img src="./images/default_pic.png" alt="">
             <div class="music-text">
-                <p class="primary-text">Lane & Massane</p>
-                <p class="primary-text">And we know it</p>
+                <p class="primary-text">Not playing</p>
+                <p class="primary-text">please select a song</p>
             </div>
         </div>
         <div class="audio-controls">
@@ -100,7 +107,7 @@
             <i class="fa-solid fa-arrow-rotate-right"></i>
         </div>
         <div id="audio-player-container">
-            <audio id="audio-player" controls src="http://listen.vo.llnwd.net/g3/prvw/9/5/1/1/7/2489571159.mp3">
+            <audio id="audio-player" controls src="">
             </audio>
         </div>
     </div>

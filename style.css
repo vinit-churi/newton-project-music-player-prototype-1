@@ -693,3 +693,7 @@ i {
 .song-card .song-card-options.open-options {
     display: block;
 }
+
+.hide-page {
+    display: none;
+}

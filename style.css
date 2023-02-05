@@ -529,6 +529,9 @@ i {
 .custom-scroll::-webkit-scrollbar {
     width: 11px;
 }
+.topPlaylist-list .playlist-tracks.custom-scroll::-webkit-scrollbar {
+    height: 11px;
+}
 
 .custom-scroll::-webkit-scrollbar-track {
     background: #fcfcfc;
@@ -561,6 +564,9 @@ i {
 .topTracks-list {
     padding: 20px 0px;
 }
+.topPlaylist-list {
+    padding: 0;
+}
 #topPlaylist .topPlaylist-list {
     flex-direction: column;
     gap: 20px;
@@ -586,7 +592,7 @@ i {
 .topPlaylist-list .playlist-item {
     display: grid;
     grid-template-rows: 35px 230px;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 0% 100%;
     gap: 0px;
     padding: 0px;
 }
@@ -606,7 +612,7 @@ i {
     grid-column-start: 2;
     grid-column-end: 3;
     /* background-color: beige; */
-    padding-left: 10px;
+    /* padding-left: 10px; */
     margin: 0px;
 }
 .topPlaylist-list .playlist-tracks {

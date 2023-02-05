@@ -222,7 +222,6 @@ function insertTracksIntoContainer(tracks) {
                             </div>
                             <div class="music-text custom-scroll">
                                 <p class="primary-text">${track.name}</p>
-                                <p class="primary-text">${track.albumName}</p>
                             </div>
                         </div>
                         `;
@@ -281,7 +280,7 @@ fetch(
                 </div>
                 <div class="music-text custom-scroll">
                     <p class="primary-text">${track.name}</p>
-                    <p class="primary-text">${track.albumName}</p>
+                    
                 </div>
             </div>
             `;
@@ -420,7 +419,7 @@ fetch(
                 </div>
                 <div class="music-text custom-scroll">
                     <p class="primary-text">${track.name}</p>
-                    <p class="primary-text">${track.albumName}</p>
+                    
                 </div>
             </div>
             `;

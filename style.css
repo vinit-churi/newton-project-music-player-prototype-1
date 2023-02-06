@@ -636,7 +636,8 @@ i {
 .topArtists-list,
 .topGenre-list,
 .topPlaylist-list,
-.search-results-container {
+.search-results-container,
+.recentlyPlayed-container {
     min-height: 210px;
     display: flex;
     align-items: center;
@@ -796,6 +797,11 @@ i {
     position: relative;
     top: -80px;
     right: 20px;
+}
+.noRecent {
+    position: relative;
+    top: -80px;
+    right: 10px;
 }
 .currently-playing,
 .next-playing {

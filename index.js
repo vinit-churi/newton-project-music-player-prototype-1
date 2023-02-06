@@ -727,6 +727,7 @@ function playNow(song) {
     if (poppedSong != undefined) recentlyPlayed.push(poppedSong);
     currentlyPlaying.push(song);
     renderQueue();
+    renderRecently();
     activateAudio(song);
 }
 function playNext() {
@@ -819,3 +820,29 @@ document
         const audio = document.querySelector("#audio-player");
         audio.currentTime -= 5;
     });
+
+function renderRecently() {
+    if (recentlyPlayed.length === 0) return;
+    const container = document.querySelector(".recentlyPlayed-container");
+    while (container.firstChild) {
+        container.firstChild.remove();
+    }
+    recentlyPlayed.forEach((track) => {
+        const trackHTML = `
+            <div data-track-name="${track.songName}" data-album-name="${track.albumName}" data-preview-url="${track.src}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
+                <img src="${track.img}"
+                    alt="">
+                <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
+                <div data-track-id="${track.id}" class="song-card-options">
+                    <p data-value="addToPlaylist" data-track-id="${track.id}" class="song-card-option">Add to playlist</p>
+                    <p data-value="addToQueue" data-track-id="${track.id}" class="song-card-option">Add to queue</p>
+                    <p data-value="playNow" data-track-id="${track.id}" class="song-card-option">Play now</p>
+                </div>
+                <div class="music-text custom-scroll">
+                    <p class="primary-text">${track.songName}</p>
+                </div>
+            </div>
+            `;
+        container.insertAdjacentHTML("beforeEnd", trackHTML);
+    });
+}

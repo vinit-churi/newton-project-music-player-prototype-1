@@ -770,3 +770,14 @@ i {
     top: -80px;
     right: 20px;
 }
+.currently-playing,
+.next-playing {
+    display: none;
+    padding: 10px;
+    opacity: 0.5;
+    font-weight: bolder;
+}
+.songs-queue:hover .currently-playing,
+.songs-queue:hover .next-playing {
+    display: block;
+}

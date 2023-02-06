@@ -326,14 +326,17 @@ fetch(
     })
     .catch((error) => console.log("error", error));
 
+console.log("is this code running");
 fetch(
-    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&limit=17",
+    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&range=life&limit=17",
     requestOptions
 )
     .then((response) => response.json())
     .then((result) => {
         topArtists = result.artists;
-        // console.log(topArtists);
+        console.log(topArtists);
+        if (topArtists.length === 0)
+            throw Error("The artist endpoint is not working");
         let i = 0;
         const requiredArtist = [];
         while (i < topArtists.length) {
@@ -498,12 +501,48 @@ function attachSlider(element) {
     });
 }
 
-document.querySelector("form").onsubmit = (e) => {
+document.querySelector("form").onsubmit = async (e) => {
     e.preventDefault();
     const searchQuery = e.target
         .querySelector('input[type="text"]')
         .value.trim();
-    // searchSong(e.target.dataset.value,searchQuery)
+    const container = searchSong(searchQuery, e.target.dataset.value);
     switchPage("search-page");
     e.target.querySelector('input[type="text"]').value = "";
 };
+
+async function searchSong(query, filter) {
+    try {
+        let response = await fetch(
+            `https://api.napster.com/v2.2/search?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&query=${query}&type=track&per_type_limit=16`
+        );
+        response = await response.json();
+        data = response.search.data.tracks;
+        const container = document.querySelector(".search-results-container");
+        while (container.firstChild) {
+            container.firstChild.remove();
+        }
+        attachSlider(container);
+        data.forEach((track) => {
+            const trackHTML = `
+            <div data-track-name="${track.name}" data-album-name="${track.albumName}" data-preview-url="${track.previewURL}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
+                <img src="https://direct.rhapsody.com/imageserver/v2/albums/${track.albumId}/images/300x300.jpg"
+                    alt="">
+                <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
+                <div data-track-id="${track.id}" class="song-card-options">
+                    <p data-value="addToPlaylist" data-track-id="${track.id}" class="song-card-option">Add to playlist</p>
+                    <p data-value="addToQueue" data-track-id="${track.id}" class="song-card-option">Add to queue</p>
+                    <p data-value="playNow" data-track-id="${track.id}" class="song-card-option">Play now</p>
+                </div>
+                <div class="music-text custom-scroll">
+                    <p class="primary-text">${track.name}</p>
+                    
+                </div>
+            </div>
+            `;
+            container.insertAdjacentHTML("beforeEnd", trackHTML);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}

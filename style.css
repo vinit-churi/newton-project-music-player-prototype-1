@@ -647,6 +647,15 @@ i {
     flex-wrap: nowrap;
     gap: 10px;
 }
+.favorites-container {
+    min-height: 210px;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
 .topTracks-list {
     padding: 20px 0px;
 }

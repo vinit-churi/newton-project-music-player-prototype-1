@@ -34,6 +34,9 @@ let playlist = [
         img
     } */
 ];
+playlist = [...JSON.parse(window.localStorage.getItem("playlist"))];
+console.log("playlist", JSON.parse(window.localStorage.getItem("playlist")));
+renderPlaylist();
 let recentlyPlayed = [
     /* {
         "id":"",
@@ -721,7 +724,11 @@ seekBar.addEventListener("change", (e) => {
     ChangeTheTime(e);
 });
 
-function addToPlaylist(song) {}
+function addToPlaylist(song) {
+    playlist.push(song);
+    window.localStorage.setItem("playlist", JSON.stringify(playlist));
+    renderPlaylist();
+}
 function addToQueue(song) {
     queue.push(song);
     renderQueue();
@@ -847,6 +854,32 @@ function renderRecently() {
                 </div>
             </div>
             `;
-        container.insertAdjacentHTML("beforeEnd", trackHTML);
+        container.insertAdjacentHTML("afterbegin", trackHTML);
+    });
+}
+
+function renderPlaylist() {
+    if (playlist.length === 0) return;
+    const container = document.querySelector(".favorites-container");
+    while (container.firstChild) {
+        container.firstChild.remove();
+    }
+    playlist.forEach((track) => {
+        const trackHTML = `
+            <div data-track-name="${track.songName}" data-album-name="${track.albumName}" data-preview-url="${track.src}" data-track-id="${track.id}"  class="song-card" data-song-preview="previewURL">
+                <img src="${track.img}"
+                    alt="">
+                <i data-song-option-toggle="${track.id}" class="fa-solid fa-ellipsis"></i>
+                <div data-track-id="${track.id}" class="song-card-options">
+                    <p data-value="addToPlaylist" data-track-id="${track.id}" class="song-card-option">Add to playlist</p>
+                    <p data-value="addToQueue" data-track-id="${track.id}" class="song-card-option">Add to queue</p>
+                    <p data-value="playNow" data-track-id="${track.id}" class="song-card-option">Play now</p>
+                </div>
+                <div class="music-text custom-scroll">
+                    <p class="primary-text">${track.songName}</p>
+                </div>
+            </div>
+            `;
+        container.insertAdjacentHTML("afterbegin", trackHTML);
     });
 }

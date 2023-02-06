@@ -781,3 +781,43 @@ i {
 .songs-queue:hover .next-playing {
     display: block;
 }
+.fa-circle-play,
+.fa-circle-pause {
+    font-size: 30px;
+}
+.audio-controls i {
+    transition: 0.3s ease color;
+}
+.audio-controls i:hover {
+    color: #2596be;
+}
+
+.hide-audio-control {
+    display: none;
+}
+.audio-player-container {
+    flex: 1 1 auto;
+    display: flex;
+    gap: 30px;
+}
+#audio-player-container .seekable {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#audio-duration-start {
+    flex: 0 0 max-content;
+}
+#audio-duration-start {
+    flex: 0 0 max-content;
+}
+#audio-seekable-slider {
+    flex: 1 1 auto;
+}
+#audio-player-container .volume-slider {
+    flex: 0 0 max-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

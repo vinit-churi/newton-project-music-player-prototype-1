@@ -117,14 +117,25 @@
             </div>
         </div>
         <div class="audio-controls">
-            <i class="fa-solid fa-arrow-rotate-left"></i>
-            <i class="fa-solid fa-backward-step"></i>
-            <i class="fa-solid fa-forward-step"></i>
-            <i class="fa-solid fa-arrow-rotate-right"></i>
+            <i id="audio-move-backward" class="fa-solid fa-arrow-rotate-left"></i>
+            <i id="audio-previous-song" class="fa-solid fa-backward-step"></i>
+            <i id="audio-play" class="fa-regular fa-circle-play"></i>
+            <i id="audio-pause" class="fa-regular fa-circle-pause hide-audio-control"></i>
+            <i id="audio-next-song" class="fa-solid fa-forward-step"></i>
+            <i id="audio-move-forward" class="fa-solid fa-arrow-rotate-right"></i>
         </div>
         <div id="audio-player-container">
-            <audio id="audio-player" controls src="">
+            <audio id="audio-player" src="">
             </audio>
+            <div class="seekable">
+                <span id="audio-duration-start">0 : 00</span>
+                <input type="range" id="audio-seekable-slider">
+                <span id="audio-duration-end">0 : 00</span>
+            </div>
+            <div class="volume-slider">
+                <i class="fa-solid fa-volume-low"></i>
+                <input type="range" id="audio-volume-slider">
+            </div>
         </div>
     </div>
     <div class="songs-queue">

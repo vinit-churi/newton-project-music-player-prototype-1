@@ -112,29 +112,29 @@
         <div class="music-info">
             <img src="./images/default_pic.png" alt="">
             <div class="music-text">
-                <p class="primary-text">Not playing</p>
-                <p class="primary-text">please select a song</p>
+                <p class="track-text">Not playing</p>
+                <p class="album-text">please select a song</p>
             </div>
         </div>
         <div class="audio-controls">
             <i id="audio-move-backward" class="fa-solid fa-arrow-rotate-left"></i>
             <i id="audio-previous-song" class="fa-solid fa-backward-step"></i>
-            <i id="audio-play" class="fa-regular fa-circle-play"></i>
-            <i id="audio-pause" class="fa-regular fa-circle-pause hide-audio-control"></i>
+            <i data-action="play" id="audio-play" class="fa-regular fa-circle-play"></i>
+            <i data-action="pause" id="audio-pause" class="fa-regular fa-circle-pause hide-audio-control"></i>
             <i id="audio-next-song" class="fa-solid fa-forward-step"></i>
             <i id="audio-move-forward" class="fa-solid fa-arrow-rotate-right"></i>
         </div>
         <div id="audio-player-container">
-            <audio id="audio-player" src="">
+            <audio preload="metadata" id="audio-player" src="">
             </audio>
             <div class="seekable">
-                <span id="audio-duration-start">0 : 00</span>
-                <input type="range" id="audio-seekable-slider">
-                <span id="audio-duration-end">0 : 00</span>
+                <span id="audio-duration-start">00 : 00</span>
+                <input min="0" max="100" value="0" type="range" id="audio-seekable-slider">
+                <span id="audio-duration-end">00 : 00</span>
             </div>
             <div class="volume-slider">
                 <i class="fa-solid fa-volume-low"></i>
-                <input type="range" id="audio-volume-slider">
+                <input min="0" max="100" value="100" type="range" id="audio-volume-slider">
             </div>
         </div>
     </div>
@@ -147,7 +147,7 @@
             </div>
         </div>
         <p class="currently-playing">Currently playing</p>
-        <div class="currently-playing-container"></div>
+        <div class="currently-playing-container "></div>
         <p class="next-playing">Next</p>
         <div class="next-playing-container"></div>
     </div>

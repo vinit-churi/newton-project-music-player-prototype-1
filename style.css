@@ -494,7 +494,7 @@ i {
     position: absolute;
     background-color: white;
     border: 2px solid var(--white);
-    height: 350px;
+    height: 385px;
     /* bottom: 100px; */
     /* top: calc(100vh - 100px); */
     /* bottom: 230px; */
@@ -509,6 +509,9 @@ i {
     bottom: 0px;
     margin: auto 0px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    /* overflow: auto; */
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 .songs-queue:hover {
     width: 500px;
@@ -595,6 +598,30 @@ i {
 }
 
 .custom-scroll::-webkit-scrollbar-thumb {
+    background-color: #cdcbcd;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+}
+
+.songs-queue:hover {
+    overflow-y: auto;
+    scrollbar-width: auto;
+    scrollbar-color: #cdcbcd #fcfcfc;
+}
+
+/* Chrome, Edge, and Safari */
+.songs-queue:hover::-webkit-scrollbar {
+    width: 11px;
+}
+/* .topPlaylist-list .playlist-tracks.custom-scroll::-webkit-scrollbar {
+    height: 11px;
+} */
+
+.songs-queue:hover::-webkit-scrollbar-track {
+    background: #fcfcfc;
+}
+
+.songs-queue:hover::-webkit-scrollbar-thumb {
     background-color: #cdcbcd;
     border-radius: 10px;
     border: 3px solid #ffffff;
@@ -820,4 +847,120 @@ i {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+/* chrome/opera/safari */
+input[type="range"] {
+    /* Styles the thumb of the input*/
+}
+input[type="range"]::-webkit-slider-thumb {
+    top: -7px;
+    position: relative;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 3px;
+}
+
+/* firefox */
+input[type="range"] {
+    /* Styles the track of the input*/
+}
+input[type="range"]::-moz-range-thumb {
+    /* Styles the thumb of the input*/
+    position: relative;
+}
+input[type="range"]::-moz-range-track {
+    height: 3px;
+}
+input[type="range"]::-moz-range-progress {
+    height: 3px;
+    /* Styles the progress/fill below the thumb of the input*/
+}
+
+/* edge */
+input[type="range"] {
+    /* Styles the progress/fill below the thumb of the input*/
+}
+input[type="range"]::-ms-thumb {
+    /* Styles the thumb of the input*/
+}
+input[type="range"]::-ms-track {
+    height: 3px;
+    /* Styles the track of the input*/
+}
+input[type="range"]::-ms-fill-lower {
+    /* Styles the progress/fill below the thumb */
+}
+input[type="range"]::-ms-fill-upper {
+    /* Styles the fill above the thumb */
+}
+
+nav form .custom-drop-down .option {
+    transition: 0.3s ease color;
+}
+nav form .custom-drop-down .option:hover {
+    color: black;
+    background-color: white;
+}
+.currently-playing-container {
+    /* display: flex; */
+}
+.currently-playing {
+    padding-bottom: 0px;
+}
+.queue-song-card img {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    /* outline: 4px solid #6ff8cfef; */
+}
+.currently-playing-container img {
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    outline: 4px solid #6ff8cfef;
+}
+.queue-song-card {
+    display: flex;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+.queue-song-card:hover {
+    background-color: #cadafb45;
+}
+.queue-song-card i {
+    padding: 20px;
+    margin-right: 0;
+    font-size: 30px;
+    opacity: 0.3;
+    cursor: pointer;
+}
+.queue-song-card .duration {
+    margin: 0 auto;
+}
+.music-text {
+    width: max-content;
+}
+
+.track-text,
+.album-text {
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.songName {
+    width: 300px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

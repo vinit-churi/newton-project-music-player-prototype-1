@@ -72,9 +72,13 @@ body.addEventListener("click", (event) => {
     }
     console.log(event.target);
     if (event.target.dataset.songOptionToggle !== undefined) {
-        const trackId = event.target.dataset.songOptionToggle;
-        document
-            .querySelector(`[data-track-id="${trackId}"].song-card-options`)
+        // const trackId = event.target.dataset.songOptionToggle;
+        // document
+        //     .querySelector(`[data-track-id="${trackId}"].song-card-options`)
+        //     .classList.toggle("open-options");
+        const parent = event.target.parentNode;
+        parent
+            .querySelector(".song-card-options")
             .classList.toggle("open-options");
     }
     if (event.target.classList.contains("song-card-option")) {

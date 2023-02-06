@@ -34,7 +34,12 @@ let playlist = [
         img
     } */
 ];
-playlist = [...JSON.parse(window.localStorage.getItem("playlist"))];
+try {
+    playlist = [...JSON.parse(window.localStorage.getItem("playlist"))];
+} catch (error) {
+    console.error(error);
+    console.log("parsing json failed");
+}
 console.log("playlist", JSON.parse(window.localStorage.getItem("playlist")));
 renderPlaylist();
 let recentlyPlayed = [

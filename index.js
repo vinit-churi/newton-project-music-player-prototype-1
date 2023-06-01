@@ -725,7 +725,7 @@ function UpdateTheTime() {
     seekBar.value = audio.currentTime;
 }
 
-seekBar.addEventListener("change", (e) => {
+seekBar.addEventListener("input", (e) => {
     ChangeTheTime(e);
 });
 

@@ -655,6 +655,7 @@ i {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    min-height: 320px;
 }
 .topTracks-list {
     padding: 20px 0px;
@@ -978,4 +979,27 @@ nav form .custom-drop-down .option:hover {
     padding-right: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* footer{
+
+} */
+.footer-icons {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0px;
+    background-color: #f1eeee;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+.footer-icons i {
+    font-size: 20px;
+    color: #2b63d9;
+}
+footer p {
+    text-align: center;
+    background-color: #2b63d9;
+    padding: 20px;
+    color: white;
 }

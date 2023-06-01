@@ -429,7 +429,7 @@ fetch(
 
 console.log("is this code running");
 fetch(
-    "https://api.napster.com/v2.2/artists/top?apikey=YTkxZTRhNzAtODdlNy00ZjMzLTg0MWItOTc0NmZmNjU4Yzk4&range=life&limit=17",
+    "https://napi-v2-2-cloud-run-b3gtd5nmxq-uw.a.run.app/v2.2/artists/top?apikey=MWE1MjlmMzEtMjNiOC00NzU1LWI2MTYtZmMyZjUzYzUyOWIz&limit=17",
     requestOptions
 )
     .then((response) => response.json())
